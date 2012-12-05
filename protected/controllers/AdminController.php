@@ -67,6 +67,10 @@ class AdminController extends Controller {
 	
 	}
 	
+	
+	/**
+	 * 处理编辑员查看参考
+	 */
 	public function actionFindAllGradeItem() {
 		
 	}

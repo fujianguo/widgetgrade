@@ -1,0 +1,29 @@
+评分-grade
+ControllerActions：
+	SiteController：前台
+		updateGrade修改一个评分
+		findAllGrade查询一个所有评分
+		addComment添加一个评论
+		findAllComment查询一个所有评论
+		updateComment修改一个评论的好评数
+
+	AdminController：后台
+		addGrade添加一个评分
+		findAllGradeItem参考，获得选择分类下关键词评分的评分项
+		
+	AuditController：审核
+		addGrade添加一个评分审核
+		addComment添加一个评论审核
+			
+	APIController：API
+			
+	SourceController：数据源
+		gradeDataToXml将一个评分数据对象转换成xml数据
+
+	Views:
+		addgrade.php添加一个评分（hems后台）
+		updateGrade.php修改一个评分值，addComment.php添加一个评论（原型上一个页面）
+		findAllGrade.php查询所有的评分（更多页）
+		findAllComment.php查询所有的评论，修改comment好评数（评分详情页）
+
+		
