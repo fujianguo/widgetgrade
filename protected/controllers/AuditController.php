@@ -3,52 +3,35 @@
 class AuditController extends Controller {
 
 	/**
-	 * 为评分添加一个审核人
+	 * 查看评分审核列表
 	 */
-	public function actionAddGrade() {
-		$arr['Grade'] = array(
-			'audittype'	=> 0,
-			'auditdate' => date('Y-m-d H:i:s',time()),
-			'auditname' => '小明',
-			'auditstate' => 1
-				);
-		
-		$grade = Grade::model()->findByPk(9);
-		if(isset($_POST['Grade'])) {
-			$grade->setAttributes($_POST['Grade']);
-			$result = $grade->save();
-			if($result) {
-				echo 'success';
-			} else {
-				echo 'error';
-			}
-		}
- 	}
+	public function actionGlists() {
 	
- 	/**
- 	 * 为评论添加一个审核人
- 	 */
-	public function actionAddComment() {
-		
-		$arr['Comment'] = array(
-				'audittype'	=> 0,
-				'auditdate' => date('Y-m-d H:i:s',time()),
-				'auditname' => '小明',
-				'auditstate' => 1
-		);
-		
-		$comment = Comment::model()->findByPk(9);
-		if(isset($_POST['Comment'])) {
-			$comment->setAttributes($_POST['Comment']);
-			$result = $comment->save();
-			if($result) {
-				echo 'success';
-			} else {
-				echo 'error';
-			}
-		}
+	}
+	
+	/**
+	 * 查看评论审核列表
+	 */
+	public function actionClists() {
+	
+	}
+	
+	/**
+	 * 评分审核,通过或者不通过
+	 */
+	public function actionGapprove() {
 		
 	}
+	
+	/**
+	 * 评论审核,通过或者不通过
+	 */
+	public function actionCapprove() {
+		
+	}
+	
+	
+	
 	
 }
 

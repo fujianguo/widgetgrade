@@ -3,9 +3,35 @@
 class SiteController extends Controller {
 	
 	/**
+	 * 查看一个评分显示
+	 * 显示这个评分的评分项
+	 * 显示这个评分的关键词所有评论
+	 */
+	public function actionView() {
+		if(isset($_POST['_id'])) {
+			$grade = Grade::model()->findByPk($_POST['_id']);
+			$criteria = new CDbCriteria();
+			$criteria->addCondition('tbl_grade_id='.$grade->_id);
+			$gradeItems = GradeItem::model()->findAll($criteria);
+			$criteria = new CDbCriteria();
+			$criteria->addCondition('keywordid='.$grade->keywordid);
+			$comments = Comment::model()->findAll($criteria);
+			
+			$this->render('view', array(
+					'grade' => $grade,
+					'gradeItems' => $gradeItems,
+					'comments' => $comments
+					));
+			
+		} else {
+			echo 'error';
+		}
+	}
+	
+	/**
 	 * 处理用户评分
 	 */
-	public function actionUpdateGradeValue() {
+	public function actionGrade() {
 	
 		$grade = Grade::model()->findByPk(9);
 		if(isset($_POST['Grade'])) {
@@ -44,8 +70,9 @@ class SiteController extends Controller {
 	
 	/**
 	 * 处理用户评论请求
+	 * 添加一个评论
 	 */
-	public function actionAddComment() {
+	public function actionAdd() {
 	
 		if(isset($_POST['Comment'])) {
 			$comment = new Comment();
@@ -73,43 +100,11 @@ class SiteController extends Controller {
 	 * 1按最新排序
 	 * 2按最热排序
 	 */
-	public function actionFindAllGrade() {
-	
+	public function actionLists() {
 	
 		$grades = Grade::model()->findAll();
 	
 		var_dump($grades);
-	}
-	
-	/**
-	 * 获得关键词下所有的评论显示
-	 */
-	public function actionFindAllComment() {
-	
-		$criteria = new CDbCriteria();
-		$criteria->addCondition('keywordid=10010');
-		$comments = Comment::model()->findAll($criteria);
-		$this->render('findAllComments',array(
-				'comments' => $comments
-		));
-	
-	}
-	
-	/**
-	 * 用户点击“支持”对评论进行好评
-	 * 修改一个评论的好评数
-	 */
-	public function actionUpdateComment() {
-	
-		if(isset($_POST['Comment'])) {
-			$comment = Comment::model()->findByPk($_POST['Comment']['_id']);
-			$comment->goodcounts = $comment->goodcounts + 1;
-			$result = $comment->save();
-			if($result) {
-				echo 'success';
-			}
-		}
-	
 	}
 	
 }
