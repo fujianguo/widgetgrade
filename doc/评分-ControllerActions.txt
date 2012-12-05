@@ -1,29 +1,29 @@
-ÆÀ·Ö-grade
-ControllerActions£º
-	SiteController£ºÇ°Ì¨
-		updateGradeĞŞ¸ÄÒ»¸öÆÀ·Ö
-		findAllGrade²éÑ¯Ò»¸öËùÓĞÆÀ·Ö
-		addCommentÌí¼ÓÒ»¸öÆÀÂÛ
-		findAllComment²éÑ¯Ò»¸öËùÓĞÆÀÂÛ
-		updateCommentĞŞ¸ÄÒ»¸öÆÀÂÛµÄºÃÆÀÊı
+è¯„åˆ†-grade
+ControllerActionsï¼š
+	SiteControllerï¼šå‰å°
+		updateGradeä¿®æ”¹ä¸€ä¸ªè¯„åˆ†(ç”¨æˆ·è¯„åˆ†)
+		findAllGradeæŸ¥è¯¢æ‰€æœ‰è¯„åˆ†
+		addCommentæ·»åŠ ä¸€ä¸ªè¯„è®º
+		findAllCommentæŸ¥è¯¢ä¸€ä¸ªè¯„åˆ†çš„æ‰€æœ‰è¯„è®º
+		updateCommentä¿®æ”¹ä¸€ä¸ªè¯„è®ºçš„å¥½è¯„æ•°
 
-	AdminController£ººóÌ¨
-		addGradeÌí¼ÓÒ»¸öÆÀ·Ö
-		findAllGradeItem²Î¿¼£¬»ñµÃÑ¡Ôñ·ÖÀàÏÂ¹Ø¼ü´ÊÆÀ·ÖµÄÆÀ·ÖÏî
+	AdminControllerï¼šåå°
+		addGradeæ·»åŠ ä¸€ä¸ªè¯„åˆ†
+		findAllGradeItemå‚è€ƒï¼Œè·å¾—é€‰æ‹©åˆ†ç±»ä¸‹å…³é”®è¯è¯„åˆ†çš„è¯„åˆ†é¡¹
 		
-	AuditController£ºÉóºË
-		addGradeÌí¼ÓÒ»¸öÆÀ·ÖÉóºË
-		addCommentÌí¼ÓÒ»¸öÆÀÂÛÉóºË
+	AuditControllerï¼šå®¡æ ¸
+		addGradeæ·»åŠ ä¸€ä¸ªè¯„åˆ†å®¡æ ¸
+		addCommentæ·»åŠ ä¸€ä¸ªè¯„è®ºå®¡æ ¸
 			
-	APIController£ºAPI
+	APIControllerï¼šAPI
 			
-	SourceController£ºÊı¾İÔ´
-		gradeDataToXml½«Ò»¸öÆÀ·ÖÊı¾İ¶ÔÏó×ª»»³ÉxmlÊı¾İ
+	SourceControllerï¼šæ•°æ®æº
+		gradeDataToXmlå°†ä¸€ä¸ªè¯„åˆ†æ•°æ®å¯¹è±¡è½¬æ¢æˆxmlæ•°æ®
 
 	Views:
-		addgrade.phpÌí¼ÓÒ»¸öÆÀ·Ö£¨hemsºóÌ¨£©
-		updateGrade.phpĞŞ¸ÄÒ»¸öÆÀ·ÖÖµ£¬addComment.phpÌí¼ÓÒ»¸öÆÀÂÛ£¨Ô­ĞÍÉÏÒ»¸öÒ³Ãæ£©
-		findAllGrade.php²éÑ¯ËùÓĞµÄÆÀ·Ö£¨¸ü¶àÒ³£©
-		findAllComment.php²éÑ¯ËùÓĞµÄÆÀÂÛ£¬ĞŞ¸ÄcommentºÃÆÀÊı£¨ÆÀ·ÖÏêÇéÒ³£©
+		addgrade.phpæ·»åŠ ä¸€ä¸ªè¯„åˆ†ï¼ˆhemsåå°ï¼‰
+		updateGrade.phpä¿®æ”¹ä¸€ä¸ªè¯„åˆ†å€¼ï¼ŒaddComment.phpæ·»åŠ ä¸€ä¸ªè¯„è®ºï¼ˆåŸå‹ä¸Šä¸€ä¸ªé¡µé¢ï¼‰
+		findAllGrade.phpæŸ¥è¯¢æ‰€æœ‰çš„è¯„åˆ†ï¼ˆæ›´å¤šé¡µï¼‰
+		findAllComment.phpæŸ¥è¯¢æ‰€æœ‰çš„è¯„è®ºï¼Œä¿®æ”¹commentå¥½è¯„æ•°ï¼ˆè¯„åˆ†è¯¦æƒ…é¡µï¼‰
 
 		
