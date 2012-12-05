@@ -1,29 +1,29 @@
 评分-grade
 ControllerActions：
 	SiteController：前台
-		updateGrade修改一个评分(用户评分)
-		findAllGrade查询所有评分
-		addComment添加一个评论
-		findAllComment查询一个评分的所有评论
-		updateComment修改一个评论的好评数
+		grade用户评分
+		lists查询所有评分
+		add添加一个评论
+		view查看一个评分
 
 	AdminController：后台
-		addGrade添加一个评分
-		findAllGradeItem参考，获得选择分类下关键词评分的评分项
+		view添加一个评分
+		ref参考，获得选择分类下关键词评分的评分项
+		config设置评分
+		image配图
 		
 	AuditController：审核
-		addGrade添加一个评分审核
-		addComment添加一个评论审核
+		gapprove评分审核
+		capprove评论审核
+		glists查看评分审核列表
+		clists查看评论审核列表
 			
 	APIController：API
 			
 	SourceController：数据源
-		gradeDataToXml将一个评分数据对象转换成xml数据
-
-	Views:
-		addgrade.php添加一个评分（hems后台）
-		updateGrade.php修改一个评分值，addComment.php添加一个评论（原型上一个页面）
-		findAllGrade.php查询所有的评分（更多页）
-		findAllComment.php查询所有的评论，修改comment好评数（评分详情页）
+		grade将一个评分数据对象转换成xml数据
+		
+	AjaxController：ajax请求
+		dig：增加一个好评的好评数
 
 		
