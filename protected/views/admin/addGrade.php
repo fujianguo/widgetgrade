@@ -19,6 +19,6 @@ $form = $this->beginWidget ( 'CActiveForm', array (
 创建者昵称：<?php echo $form->textField($grade,'creaternickname'); ?> <br/>
 ---<br/>
 
-<?php echo CHtml::submitButton('提交')?>
+<?php echo CHtml::submitButton('评分')?>
 
 <?php $this->endWidget();?>

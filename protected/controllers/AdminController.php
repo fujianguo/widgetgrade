@@ -2,9 +2,11 @@
 
 class AdminController extends Controller {
 
+	
+	/**
+	 * 显示添加评分页面
+	 */
 	public function actionAdd() {
-		
-// 		$this->render('addComment');
 		
 		$grade = new Grade();
 		$gradeItem = new GradeItem();
@@ -18,6 +20,9 @@ class AdminController extends Controller {
 		
 	}
 	
+	/**
+	 * 处理添加一个评分请求
+	 */
 	public function actionGetGrade() {
 		
 		if(isset($_POST['Grade']) ||
@@ -69,6 +74,9 @@ class AdminController extends Controller {
 		
 	}
 	
+	/**
+	 * 显示一个用户评分页面
+	 */
 	public function actionShowGradeValue() {
 		
 		$grade = Grade::model()->findByPk(9);
@@ -84,20 +92,107 @@ class AdminController extends Controller {
 		
 	}
 	
+	/**
+	 * 处理用户评分
+	 */
 	public function actionGetGradeValue() {
 		
 		$grade = Grade::model()->findByPk(9);
-		
-		$criteria = new CDbCriteria();
-		$criteria->addCondition('tbl_grade_id=9');
-		$gradeItems = GradeItem::model()->findAll($criteria);
-		
-		
-		$gradeForm = $_POST['Grade'];
-		$gradeItemForm = $_POST['GradeItem'];
-		var_dump($gradeItemForm);
+		if(isset($_POST['Grade'])) {
+			$gradeForm = $_POST['Grade'];
+			$grade->gradevalue = $grade->gradevalue + $gradeForm['gradevalue'];
+			$grade->gradecounts = $grade->gradecounts + 1;
+			$result = $grade->save();
+				if($result) {
+				$criteria = new CDbCriteria();
+				$criteria->addCondition('tbl_grade_id=9');
+				$gradeItems = GradeItem::model()->findAll($criteria);
+				
+				foreach ($gradeItems as $gradeItem) {
+					if(isset($_POST[$gradeItem->_id])) {
+						$gradeItem->gradeitemvalue = $gradeItem->gradeitemvalue + $_POST[$gradeItem->_id];
+						$gradeItem->save();
+					}
+				}
+			}
+			echo 'success';
+		}
 	}
 	
+	/**
+	 * 显示一个用户评论页面
+	 */
+	public function actionShowComment() {
+		$comment = new Comment();
+		$this->render('addComment',array(
+				'comment' => $comment
+				));	
+	}
+	
+	/**
+	 * 处理用户评论请求
+	 */
+	public function actionAddComment() {
+		
+		if(isset($_POST['Comment'])) {
+			$comment = new Comment();
+			$comment->setAttributes($_POST['Comment']);
+			$comment->goodcounts = 0;
+			$comment->commenttime = date('Y-m-d H:i:s',time());
+			$result = $comment->save();
+			if($result) {
+				echo 'success';
+			}  else {
+				$this->render('addComment',array(
+						'comment' => $comment
+				));
+			}
+		} 
+	}
+	
+	/**
+	 * 获得关键词下所有的评论显示
+	 */
+	public function actionFindAllComment() {
+		
+		$criteria = new CDbCriteria();
+		$criteria->addCondition('keywordid=10010');
+		$comments = Comment::model()->findAll($criteria);
+		$this->render('findAllComments',array(
+					'comments' => $comments
+				));
+		
+	}
+	
+	/**
+	 * 获得所有的评分
+	 * 1按最新排序
+	 * 2按最热排序
+	 */
+	public function actionFindAllGrade() {
+		
+		
+		$grades = Grade::model()->findAll();
+		
+		var_dump($grades);
+	}
+	
+	/**
+	 * 用户点击“支持”对评论进行好评
+	 * 修改一个评论的好评数
+	 */
+	public function actionUpdateComment() {
+		
+		if(isset($_POST['Comment'])) {
+			$comment = Comment::model()->findByPk($_POST['Comment']['_id']);
+			$comment->goodcounts = $comment->goodcounts + 1;
+			$result = $comment->save();
+			if($result) {
+				echo 'success';
+			}
+		}
+		
+	}
 	
 }
 
