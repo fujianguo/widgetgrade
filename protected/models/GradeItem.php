@@ -13,7 +13,7 @@
  * The followings are the available model relations:
  * @property TblGrade $tblGrade
  */
-class GradeItem extends CActiveRecord
+class GradeItem extends CActiveRecordAdv
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -40,7 +40,6 @@ class GradeItem extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tbl_grade_id', 'required'),
 			array('gradeitemvalue, displayorder, tbl_grade_id', 'numerical', 'integerOnly'=>true),
 			array('gradeitem', 'length', 'max'=>50),
 			// The following rule is used by search().
@@ -57,10 +56,16 @@ class GradeItem extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblGrade' => array(self::BELONGS_TO, 'TblGrade', 'tbl_grade_id'),
+			'grade' => array(self::BELONGS_TO, 'Grade', 'tbl_grade_id'),
 		);
 	}
 
+	public function cascade() {
+		return array(
+				'grade'
+		);
+	}
+	
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -68,10 +73,10 @@ class GradeItem extends CActiveRecord
 	{
 		return array(
 			'_id' => 'ID',
-			'gradeitem' => 'Gradeitem',
-			'gradeitemvalue' => 'Gradeitemvalue',
-			'displayorder' => 'Displayorder',
-			'tbl_grade_id' => 'Tbl Grade',
+			'gradeitem' => '评分项标题',
+			'gradeitemvalue' => '评分项总值',
+			'displayorder' => '排序号',
+			'tbl_grade_id' => '评分id',
 		);
 	}
 
@@ -95,5 +100,13 @@ class GradeItem extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function behaviors() {
+		return array(
+				'gradeItem' => array(
+						'class' => 'application.components.behaviors.GradeItemBehavior'
+				),
+		);
 	}
 }

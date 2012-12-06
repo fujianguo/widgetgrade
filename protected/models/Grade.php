@@ -24,7 +24,7 @@
  * @property TblGradeItem[] $tblGradeItems
  * @property TblGradeOperateLog[] $tblGradeOperateLogs
  */
-class Grade extends CActiveRecord
+class Grade extends CActiveRecordAdv
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -51,7 +51,7 @@ class Grade extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('gradevalue', 'required'),
+			array('gradevalue', 'required', 'on'=>'update'),
 			array('keywordid, gradevalue, gradecounts, createrid, audittype, auditstate', 'numerical', 'integerOnly'=>true),
 			array('keyword, picpath, createtime, auditdate', 'length', 'max'=>50),
 			array('gradeitems', 'length', 'max'=>500),
@@ -71,10 +71,16 @@ class Grade extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblGradeCateRelateds' => array(self::HAS_MANY, 'TblGradeCateRelated', 'tbl_grade_id'),
-			'tblGradeItems' => array(self::HAS_MANY, 'TblGradeItem', 'tbl_grade_id'),
-			'tblGradeOperateLogs' => array(self::HAS_MANY, 'TblGradeOperateLog', 'tbl_grade_id'),
+			'gradeCateRelateds' => array(self::HAS_MANY, 'GradeCateRelated', 'tbl_grade_id'),
+			'gradeItems' => array(self::HAS_MANY, 'GradeItem', 'tbl_grade_id'),
+			'gradeOperateLogs' => array(self::HAS_MANY, 'GradeOperateLog', 'tbl_grade_id'),
 		);
+	}
+	
+	public function cascade() {
+		return array(
+				'gradeCateRelateds', 'gradeItems', 'gradeOperateLogs'
+				);
 	}
 
 	/**
@@ -84,19 +90,19 @@ class Grade extends CActiveRecord
 	{
 		return array(
 			'_id' => 'ID',
-			'keywordid' => 'Keywordid',
-			'keyword' => 'Keyword',
-			'picpath' => 'Picpath',
-			'gradevalue' => 'Gradevalue',
-			'gradecounts' => 'Gradecounts',
-			'gradeitems' => 'Gradeitems',
-			'createrid' => 'Createrid',
-			'createtime' => 'Createtime',
-			'creaternickname' => 'Creaternickname',
-			'audittype' => 'Audittype',
-			'auditdate' => 'Auditdate',
-			'auditname' => 'Auditname',
-			'auditstate' => 'Auditstate',
+			'keywordid' => '关键词id',
+			'keyword' => '关键词',
+			'picpath' => '图片路径',
+			'gradevalue' => '总评分值',
+			'gradecounts' => '总评分人数',
+			'gradeitems' => '评分项',
+			'createrid' => '创建者id',
+			'createtime' => '创建时间',
+			'creaternickname' => '创建者昵称',
+			'audittype' => '审核类型',
+			'auditdate' => '审核时间',
+			'auditname' => '审核人名称',
+			'auditstate' => '审核状态',
 		);
 	}
 
@@ -129,5 +135,13 @@ class Grade extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function behaviors() {
+		return array(
+				'grade' => array(
+						'class' => 'application.components.behaviors.GradeBehavior'
+						),
+				);
 	}
 }

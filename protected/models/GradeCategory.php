@@ -11,7 +11,7 @@
  * The followings are the available model relations:
  * @property TblGradeCateRelated[] $tblGradeCateRelateds
  */
-class GradeCategory extends CActiveRecord
+class GradeCategory extends CActiveRecordAdv
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -54,8 +54,14 @@ class GradeCategory extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblGradeCateRelateds' => array(self::HAS_MANY, 'TblGradeCateRelated', 'tbl_grade_category_id'),
+			'gradeCateRelateds' => array(self::HAS_MANY, 'GradeCateRelated', 'tbl_grade_category_id'),
 		);
+	}
+	
+	public function cascade() {
+		return array(
+				'gradeCateRelateds'
+				);
 	}
 
 	/**
@@ -65,8 +71,8 @@ class GradeCategory extends CActiveRecord
 	{
 		return array(
 			'_id' => 'ID',
-			'categroyname' => 'Categroyname',
-			'parentid' => 'Parentid',
+			'categroyname' => '分类名称',
+			'parentid' => '上一级id',
 		);
 	}
 

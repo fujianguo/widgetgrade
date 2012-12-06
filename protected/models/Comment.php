@@ -17,7 +17,7 @@
  * @property string $auditname
  * @property integer $auditstate
  */
-class Comment extends CActiveRecord
+class Comment extends CActiveRecordAdv
 {
 	/**
 	 * Returns the static model of the specified AR class.

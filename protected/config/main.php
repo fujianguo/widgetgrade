@@ -5,13 +5,14 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+Yii::setPathOfAlias('lib', dirname(__FILE__).'/../../../syslib');
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
 	'language' => 'zh_cn',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array('log','giiAutoRunner'),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -23,11 +24,12 @@ return array(
 		// uncomment the following to enable the Gii tool
 		
 		'gii'=>array(
-			'class'=>'system.gii.GiiModule',
+			'class'=>'lib.giiadv.GiiModule',
 			'password'=>'1',
-		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
+			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
-		),
+			),
+			
 		
 	),
 
@@ -37,6 +39,11 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		'giiAutoRunner' => array(
+				'class' => 'lib.components.code.CAutoMDCode',
+				'shutdown' => false,
+		),
+				
 		// uncomment the following to enable URLs in path-format
 		
 		'urlManager'=>array(

@@ -14,7 +14,7 @@
  * The followings are the available model relations:
  * @property TblGrade $tblGrade
  */
-class GradeOperateLog extends CActiveRecord
+class GradeOperateLog extends CActiveRecordAdv
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -41,7 +41,6 @@ class GradeOperateLog extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tbl_grade_id', 'required'),
 			array('tbl_grade_id', 'numerical', 'integerOnly'=>true),
 			array('opttype', 'length', 'max'=>64),
 			array('opttime', 'length', 'max'=>50),
@@ -60,7 +59,13 @@ class GradeOperateLog extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblGrade' => array(self::BELONGS_TO, 'TblGrade', 'tbl_grade_id'),
+			'grade' => array(self::BELONGS_TO, 'Grade', 'tbl_grade_id'),
+		);
+	}
+	
+	public function cascade() {
+		return array(
+				'grade'
 		);
 	}
 
@@ -71,11 +76,11 @@ class GradeOperateLog extends CActiveRecord
 	{
 		return array(
 			'_id' => 'ID',
-			'opttype' => 'Opttype',
-			'opttime' => 'Opttime',
-			'optname' => 'Optname',
-			'content' => 'Content',
-			'tbl_grade_id' => 'Tbl Grade',
+			'opttype' => '操作类型',
+			'opttime' => '操作时间',
+			'optname' => '操作人姓名',
+			'content' => '内容',
+			'tbl_grade_id' => '评分id',
 		);
 	}
 

@@ -12,7 +12,7 @@
  * @property TblGradeCategory $tblGradeCategory
  * @property TblGrade $tblGrade
  */
-class GradeCateRelated extends CActiveRecord
+class GradeCateRelated extends CActiveRecordAdv
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -39,8 +39,7 @@ class GradeCateRelated extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tbl_grade_id, tbl_grade_category_id', 'required'),
-			array('tbl_grade_id, tbl_grade_category_id', 'numerical', 'integerOnly'=>true),
+// 			array('tbl_grade_id, tbl_grade_category_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('_id, tbl_grade_id, tbl_grade_category_id', 'safe', 'on'=>'search'),
@@ -55,9 +54,15 @@ class GradeCateRelated extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tblGradeCategory' => array(self::BELONGS_TO, 'TblGradeCategory', 'tbl_grade_category_id'),
-			'tblGrade' => array(self::BELONGS_TO, 'TblGrade', 'tbl_grade_id'),
+			'gradeCategory' => array(self::BELONGS_TO, 'GradeCategory', 'tbl_grade_category_id'),
+			'grade' => array(self::BELONGS_TO, 'Grade', 'tbl_grade_id'),
 		);
+	}
+	
+	public function cascade() {
+		return array(
+				'gradeCategory', 'grade'
+				);
 	}
 
 	/**
@@ -67,11 +72,11 @@ class GradeCateRelated extends CActiveRecord
 	{
 		return array(
 			'_id' => 'ID',
-			'tbl_grade_id' => 'Tbl Grade',
-			'tbl_grade_category_id' => 'Tbl Grade Category',
+			'tbl_grade_id' => '评分id',
+			'tbl_grade_category_id' => '分类id',
 		);
 	}
-
+	
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
